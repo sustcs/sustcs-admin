@@ -36,3 +36,20 @@ Configuring the Proxy Manually
 Direct redirection
 contentscript.js:1 Uncaught Error
     at contentscript.js:1
+- gh-pages do not upload
+  origin <--> homepage
+
+# Router
+react-router
+|──react-router-dom
+└──react-router-native
+```sh
+cnpm i react-router-dom --save
+```
+## Error
+- router '/'
+- The href attribute is required for an anchor to be keyboard accessible. Provide a valid, navigable address as the href value. If you cannot provide an href, but still need the element to resemble a link, use a button and change it with appropriate styles
+## Reference
+<small>
+[1] REACT TRAINING.WEB-Quick Start.https://reacttraining.com/react-router/web/guides/quick-start [EB/OL] 2018
+</small>
