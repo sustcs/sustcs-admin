@@ -48,7 +48,7 @@ function Users({ match }) {
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router basename="/admin">
         <Layout className="layout">
           <Header>
             <div className="logo" />
