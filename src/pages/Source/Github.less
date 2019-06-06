@@ -1,0 +1,42 @@
+@import '~antd/lib/style/themes/default.less';
+@import '~@/utils/utils.less';
+
+.headerInfo {
+  position: relative;
+  text-align: center;
+  & > p {
+    margin: 0;
+    color: @heading-color;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  & > em {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 56px;
+    background-color: @border-color-split;
+  }
+}
+.extraImg {
+  width: 195px;
+  margin-top: -60px;
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+.pageHeaderContent {
+  position: relative;
+}
+@media screen and (max-width: @screen-sm) {
+  .pageHeaderContent {
+    padding-bottom: 30px;
+  }
+}
+@media screen and (max-width: @screen-md) {
+  .extraImg {
+    display: none;
+  }
+}
