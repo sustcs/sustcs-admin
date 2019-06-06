@@ -66,7 +66,7 @@ class UserLayout extends Component {
                   <span className={styles.title}>SUSTCS</span>
                 </Link>
               </div>
-              <div className={styles.desc}>计算机专业微信小程序平台</div>
+              <div className={styles.desc}>{formatMessage({ id: 'app.login.title' })}</div>
             </div>
             {children}
           </div>

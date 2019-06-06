@@ -1,149 +1,136 @@
 import React, { Component } from 'react';
+import { Card , Icon, message, Button} from 'antd';
+import uuidv1 from 'uuid/v1';
+import { formatMessage } from 'umi-plugin-react/locale';
+import QRCode from 'qrcode.react';
 import { connect } from 'dva';
-import { formatMessage, FormattedMessage } from 'umi-plugin-react/locale';
-import { Alert, Modal } from 'antd';
-import Login from '@/components/Login';
+import io from 'socket.io-client';
 import styles from './Login.less';
 
-const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
+const qrCodeUrl = "http://localhost:3000/";// domain
+const serverUrl = "http://localhost:8080/";
 
-@connect(({ login, loading }) => ({
-  login,
-  submitting: loading.effects['login/login'],
+@connect(({ login}) => ({
+  login
 }))
 class LoginPage extends Component {
-  state = {
-    type: 'account',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      uuid: "",
+      error: null,
+      isLoaded: false
+    }
+  }
 
-  onTabChange = type => {
-    this.setState({ type });
-  };
+  componentDidMount() {
+    var uuid = uuidv1();
+    this.fetchQrCode(uuid, 'login');
+  }
 
-  onGetCaptcha = () =>
-    new Promise((resolve, reject) => {
-      this.loginForm.validateFields(['mobile'], {}, (err, values) => {
-        if (err) {
-          reject(err);
-        } else {
-          const { dispatch } = this.props;
-          dispatch({
-            type: 'login/getCaptcha',
-            payload: values.mobile,
-          })
-            .then(resolve)
-            .catch(reject);
+  createConnect(channel) {
+    var url = serverUrl + '?channel=' + channel;
+    const socket = (this.socket = io(
+      url,
+    ))
+    socket.on('connect', () => {
+      socket.emit('listen', channel);
 
-          Modal.info({
-            title: formatMessage({ id: 'app.login.verification-code-warning' }),
-          });
-        }
-      });
     });
+    socket.on('isScan', (res) => {
+      console.log('isScan', res);
+      message.success('scaned, Please authorize');
+    });
+    socket.on('auth result', (res) => {
+      console.log('auth result', res);
+      message.success('welcome' + JSON.stringify(res));
 
-  handleSubmit = (err, values) => {
-    const { type } = this.state;
-    if (!err) {
       const { dispatch } = this.props;
       dispatch({
         type: 'login/login',
         payload: {
-          ...values,
-          type,
+          ...res,
         },
       });
+
+      this.disconnectSocket();
+    });
+    socket.on('expired', () => {
+      message.error('expired, please refresh');
+      this.disconnectSocket();
+    });
+    socket.on('sys', (msg) => {
+      console.log('sys', msg);
+    });
+  }
+
+  disconnectSocket() {
+    this.socket.emit('leave', 'client');
+    if (this.socket) {
+      this.socket.close()
+      this.socket = null
     }
-  };
+  }
 
-  renderMessage = content => (
-    <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />
-  );
-
+  fetchQrCode(uuid, action) {
+    var url = serverUrl + 'qrcode';
+    fetch(
+      url, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          uuid: uuid,
+          action: action
+        })
+      }
+    ).then(res => res.json())
+      .then(
+        (result) => {
+          if (result.uuid === uuid) {
+            this.setState({
+              isLoaded: true,
+              qrCode: qrCodeUrl + result.qrCodeKey
+            });
+            this.createConnect(uuid);
+          } else {
+            console.log('render error', result);
+          }
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+          console.log('fetch error', error);
+        }
+      )
+  }
+  
+  refresh = () => {
+    if (this.socket) {
+      this.socket.emit('leave', 'client');
+    }
+    var uuid = uuidv1();
+    this.fetchQrCode(uuid, 'login');
+  }
+  
   render() {
-    const { login, submitting } = this.props;
-    const { type } = this.state;
-    return (
-      <div className={styles.main}>
-        <Login
-          defaultActiveKey={type}
-          onTabChange={this.onTabChange}
-          onSubmit={this.handleSubmit}
-          ref={form => {
-            this.loginForm = form;
-          }}
-        >
-          <Tab key="account" tab={formatMessage({ id: 'app.login.tab-login-credentials' })}>
-            {login.status === 'error' &&
-              login.type === 'account' &&
-              !submitting &&
-              this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
-            <UserName
-              name="userName"
-              placeholder={`${formatMessage({ id: 'app.login.userName' })}: admin or user`}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({ id: 'validation.userName.required' }),
-                },
-              ]}
-            />
-            <Password
-              name="password"
-              placeholder={`${formatMessage({ id: 'app.login.password' })}: ant.design`}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({ id: 'validation.password.required' }),
-                },
-              ]}
-              onPressEnter={e => {
-                e.preventDefault();
-                this.loginForm.validateFields(this.handleSubmit);
-              }}
-            />
-          </Tab>
-          <Tab key="mobile" tab={formatMessage({ id: 'app.login.tab-login-mobile' })}>
-            {login.status === 'error' &&
-              login.type === 'mobile' &&
-              !submitting &&
-              this.renderMessage(
-                formatMessage({ id: 'app.login.message-invalid-verification-code' })
-              )}
-            <Mobile
-              name="mobile"
-              placeholder={formatMessage({ id: 'form.phone-number.placeholder' })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({ id: 'validation.phone-number.required' }),
-                },
-                {
-                  pattern: /^1\d{10}$/,
-                  message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
-                },
-              ]}
-            />
-            <Captcha
-              name="captcha"
-              placeholder={formatMessage({ id: 'form.verification-code.placeholder' })}
-              countDown={120}
-              onGetCaptcha={this.onGetCaptcha}
-              getCaptchaButtonText={formatMessage({ id: 'form.get-captcha' })}
-              getCaptchaSecondText={formatMessage({ id: 'form.captcha.second' })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({ id: 'validation.verification-code.required' }),
-                },
-              ]}
-            />
-          </Tab>
-          <Submit loading={submitting}>
-            <FormattedMessage id="app.login.login" />
-          </Submit>
-        </Login>
-      </div>
-    );
+    const { error, isLoaded, qrCode, spin } = this.state;
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div className={styles.main} style={{ textAlign: 'center', padding: 24 }}>
+          <Card title={formatMessage({ id: 'app.login.scan' })} bordered={false} style={{ width: 300 }} extra={<Button  shape="circle" icon="reload" onClick={this.refresh}/>} >
+            <QRCode size={250} value={qrCode} />
+          </Card>
+        </div>
+      );
+    }
   }
 }
 

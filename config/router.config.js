@@ -11,6 +11,15 @@ export default [
       },
     ],
   },
+  {
+    path: '/weapp',
+    component: '../layouts/UserLayout',
+    routes: [
+      {
+        component: './Exception/Weapp',
+      },
+    ],
+  },
   // app
   {
     path: '/',

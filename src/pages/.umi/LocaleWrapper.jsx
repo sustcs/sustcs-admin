@@ -33,7 +33,7 @@ defaultAntd = defaultAntd.default || defaultAntd;
 const localeInfo = {
   'en-US': {
     messages: {
-      ...require('/home/jerry/data/react/antd/pro-ant-design/src/locales/en-US.js').default,
+      ...require('/home/jerry/data/react/antd/admin/src/locales/en-US.js').default,
     },
     locale: 'en-US',
     antd: require('antd/lib/locale-provider/en_US'),
@@ -42,7 +42,7 @@ const localeInfo = {
   },
   'zh-CN': {
     messages: {
-      ...require('/home/jerry/data/react/antd/pro-ant-design/src/locales/zh-CN.js').default,
+      ...require('/home/jerry/data/react/antd/admin/src/locales/zh-CN.js').default,
     },
     locale: 'zh-CN',
     antd: require('antd/lib/locale-provider/zh_CN'),
