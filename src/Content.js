@@ -60,6 +60,7 @@ class Content extends React.Component {
 
     return (
       <div>
+        
         <ShoppingList name="test" alt={picture.title} src={picture.src}>
           {picture.title}
         </ShoppingList>

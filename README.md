@@ -46,10 +46,26 @@ react-router
 ```sh
 cnpm i react-router-dom --save
 ```
+how to config the router
 ## Error
 - router '/'
 - The href attribute is required for an anchor to be keyboard accessible. Provide a valid, navigable address as the href value. If you cannot provide an href, but still need the element to resemble a link, use a button and change it with appropriate styles
+
+- There appears to be trouble with your network connection. Retrying..
+  An unexpected error occurred: "https://registry.npm.taobao.org/react: tunneling socket could not be established, cause=connect EINVAL 0.0.31.182:80 - Local (0.0.0.0:0)"
+  网络上有两种截然相反的解决方式，
+  - [增加代理](https://blog.csdn.net/tyro_java/article/details/79772442) 
+  ```sh
+  npm config rm proxy 
+  npm config rm https-proxy
+  ```
+  - [删除代理](http://www.voidcn.com/article/p-yrikahtp-bos.html)
+  ```sh
+  npm config set registry https://registry.npm.taobao.org
+  npm config set disturl https://npm.taobao.org/dist
+  ```
 ## Reference
 <small>
 [1] REACT TRAINING.WEB-Quick Start.https://reacttraining.com/react-router/web/guides/quick-start [EB/OL] 2018
 </small>
+
