@@ -1,136 +1,162 @@
 import React, { Component } from 'react';
-import { Card , Icon, message, Button} from 'antd';
+import { Card , Icon, message, Button, Tooltip, Alert} from 'antd';
 import uuidv1 from 'uuid/v1';
 import { formatMessage } from 'umi-plugin-react/locale';
 import QRCode from 'qrcode.react';
 import { connect } from 'dva';
 import io from 'socket.io-client';
+import { getQueryPath } from '@/utils/utils';
 import styles from './Login.less';
+import { func } from 'prop-types';
 
-const qrCodeUrl = "http://localhost:3000/";// domain
-const serverUrl = "http://localhost:8080/";
-
+const clientUrl = "http://localhost:8000/";// QRcode prefix
+const serverUrl = "http://localhost:7001/"; // fetch QRcode ,io
+let isExpired = null;
 @connect(({ login}) => ({
-  login
+  login,
 }))
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uuid: "",
-      error: null,
-      isLoaded: false
+      
     }
   }
 
   componentDidMount() {
     var uuid = uuidv1();
-    this.fetchQrCode(uuid, 'login');
+    this.setState({
+      uuid: uuid,
+    });
+    const { dispatch, login: { qrCode }  } = this.props;
+    dispatch({
+      type: 'login/getQrCode',
+      payload: {
+        prefix: clientUrl,
+        scanType: 'weapp',
+        key: uuid,
+        action:'login'
+      },
+    })
+    
   }
 
-  createConnect(channel) {
-    var url = serverUrl + '?channel=' + channel;
+  componentDidUpdate() {
+    if(isExpired !== null) {
+      clearTimeout(isExpired);
+      isExpired = null;
+    }
+    const { uuid } = this.state;
+    const { dispatch, login: { qrCode }  } = this.props;
+    let that = this;
+    if(qrCode.expire !== '') {
+      isExpired = setTimeout(function() {
+         message.info('QRcode expired,please refresh',1)
+         .then(that.refresh);
+      },qrCode.expire * 1000);
+
+      this.createConnect(uuid, qrCode.expire);
+    }
+  }
+
+  createConnect(room, expire) {
     const socket = (this.socket = io(
-      url,
-    ))
-    socket.on('connect', () => {
-      socket.emit('listen', channel);
-
-    });
-    socket.on('isScan', (res) => {
-      console.log('isScan', res);
-      message.success('scaned, Please authorize');
-    });
-    socket.on('auth result', (res) => {
-      console.log('auth result', res);
-      message.success('welcome' + JSON.stringify(res));
-
-      const { dispatch } = this.props;
-      dispatch({
-        type: 'login/login',
-        payload: {
-          ...res,
+      serverUrl + 'qrcode', {
+        query: {
+          room: room,
+          type: 'admin',
+          expire: expire
         },
-      });
-
+        transports: ['websocket']
+      }
+    ))
+    socket.on('join', type => {
+      if(type === 'admin') {
+        message.success('QRcode updated', 1);
+      } else if(type === 'weapp') {
+        message.success('scaned, Please authorize', 1);
+      }
+    });
+    socket.on('admin', (res) => {
+      const {statusCode, msg} = res.data.payload;
+      if(statusCode === 1) {
+        
+        this.handleSubmit(msg);
+      } else {
+        message.error(msg);
+      }
       this.disconnectSocket();
     });
-    socket.on('expired', () => {
-      message.error('expired, please refresh');
-      this.disconnectSocket();
+    
+    socket.on('disconnect', msg => {
+      console.log('#disconnect', msg);
     });
-    socket.on('sys', (msg) => {
-      console.log('sys', msg);
+  
+    socket.on('disconnecting', () => {
+      console.log('#disconnecting');
     });
-  }
+  
+    socket.on('error', (err) => {
+      console.log(err);
+    });
+  };
 
   disconnectSocket() {
-    this.socket.emit('leave', 'client');
     if (this.socket) {
       this.socket.close()
       this.socket = null
     }
-  }
+  };
+　
+  handleSubmit(values) {
+    const { dispatch , login} = this.props;
+    dispatch({
+      type: 'login/login',
+      payload: {
+        ...values,
+      },
+    });
 
-  fetchQrCode(uuid, action) {
-    var url = serverUrl + 'qrcode';
-    fetch(
-      url, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          uuid: uuid,
-          action: action
-        })
-      }
-    ).then(res => res.json())
-      .then(
-        (result) => {
-          if (result.uuid === uuid) {
-            this.setState({
-              isLoaded: true,
-              qrCode: qrCodeUrl + result.qrCodeKey
-            });
-            this.createConnect(uuid);
-          } else {
-            console.log('render error', result);
-          }
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-          console.log('fetch error', error);
-        }
-      )
-  }
-  
+  };
+
   refresh = () => {
     if (this.socket) {
-      this.socket.emit('leave', 'client');
+      this.disconnectSocket();
+      
     }
     var uuid = uuidv1();
-    this.fetchQrCode(uuid, 'login');
+    this.setState({
+      uuid: uuid,
+    });
+    const { dispatch, login: { qrCode } } = this.props;
+    dispatch({
+      type: 'login/getQrCode',
+      payload: {
+        prefix: clientUrl,
+        scanType: 'weapp',
+        key: uuid,
+        action:'login'
+      },
+    })
   }
   
   render() {
-    const { error, isLoaded, qrCode, spin } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return (
-        <div className={styles.main} style={{ textAlign: 'center', padding: 24 }}>
-          <Card title={formatMessage({ id: 'app.login.scan' })} bordered={false} style={{ width: 300 }} extra={<Button  shape="circle" icon="reload" onClick={this.refresh}/>} >
-            <QRCode size={250} value={qrCode} />
-          </Card>
-        </div>
-      );
+    const { login: { qrCode, status,userInfo} } = this.props;
+    if(status === 'ok') {
+      message.success('welcome ' + userInfo.openid, 1);
+    } else if(status === 'error'){
+      message.error("Sorry, you don't seem to have access");
     }
+    return (
+      <div className={styles.main} style={{ textAlign: 'center', padding: 24 }}>
+        <Card title={formatMessage({ id: 'app.login.scan' })} bordered={false} style={{ width: 300 }} 
+          extra={<Tooltip title="Refresh">
+              <Button  shape="circle" icon="reload" onClick={this.refresh}/>
+            </Tooltip>} >
+          <QRCode size={250} value={qrCode.qrCode} />
+        </Card>
+      </div>
+    );
   }
 }
 

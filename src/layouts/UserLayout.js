@@ -30,7 +30,7 @@ const links = [
 
 const copyright = (
   <Fragment>
-    Copyright <Icon type="copyright" /> 2019 电子信息与人工智能学院计算机系出品
+    Copyright <Icon type="copyright" /> 2019 {formatMessage({ id: 'component.globalFooter.copyright' })}  
   </Fragment>
 );
 

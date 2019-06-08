@@ -156,6 +156,6 @@ export async function queryNotices(params = {}) {
   return request(`/api/notices?${stringify(params)}`);
 }
 
-export async function getFakeCaptcha(mobile) {
-  return request(`/api/captcha?mobile=${mobile}`);
+export async function getFakeQrCode(params = {}) {
+  return request(`/api/qrcode?${stringify(params)}`);
 }

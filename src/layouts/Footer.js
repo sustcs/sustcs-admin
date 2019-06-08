@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Layout, Icon } from 'antd';
+import { formatMessage } from 'umi-plugin-react/locale';
 import GlobalFooter from '@/components/GlobalFooter';
 
 const { Footer } = Layout;
@@ -28,7 +29,7 @@ const FooterView = () => (
       ]}
       copyright={
         <Fragment>
-          Copyright <Icon type="copyright" /> 2019 电子信息与人工智能学院计算机系出品
+          Copyright <Icon type="copyright" />2019 {formatMessage({ id: 'component.globalFooter.copyright' })}  
         </Fragment>
       }
     />

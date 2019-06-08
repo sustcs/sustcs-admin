@@ -41,7 +41,7 @@ const routes = [
         "exact": true
       },
       {
-        "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
@@ -62,7 +62,7 @@ const routes = [
         "exact": true
       },
       {
-        "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
@@ -135,7 +135,7 @@ models: () => [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -175,7 +175,7 @@ models: () => [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -205,7 +205,7 @@ models: () => [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -225,7 +225,7 @@ models: () => [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -245,7 +245,7 @@ models: () => [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -265,7 +265,7 @@ models: () => [
             "exact": true
           },
           {
-            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -288,12 +288,12 @@ models: () => [
         "exact": true
       },
       {
-        "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
   {
-    "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.1@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+    "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
   }
 ];
 window.g_routes = routes;

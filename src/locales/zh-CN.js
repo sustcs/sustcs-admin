@@ -2,6 +2,7 @@ import analysis from './zh-CN/analysis';
 import exception from './zh-CN/exception';
 import form from './zh-CN/form';
 import globalHeader from './zh-CN/globalHeader';
+import globalFooter from './zh-CN/globalFooter';
 import login from './zh-CN/login';
 import menu from './zh-CN/menu';
 import monitor from './zh-CN/monitor';
@@ -25,6 +26,7 @@ export default {
   ...exception,
   ...form,
   ...globalHeader,
+  ...globalFooter,
   ...login,
   ...menu,
   ...monitor,

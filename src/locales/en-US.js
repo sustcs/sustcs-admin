@@ -2,6 +2,7 @@ import analysis from './en-US/analysis';
 import exception from './en-US/exception';
 import form from './en-US/form';
 import globalHeader from './en-US/globalHeader';
+import globalFooter from './en-US/globalFooter';
 import login from './en-US/login';
 import menu from './en-US/menu';
 import monitor from './en-US/monitor';
@@ -25,6 +26,7 @@ export default {
   ...exception,
   ...form,
   ...globalHeader,
+  ...globalFooter,
   ...login,
   ...menu,
   ...monitor,

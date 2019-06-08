@@ -198,10 +198,17 @@ const getActivities = [
   },
 ];
 
-function getFakeCaptcha(req, res) {
-  return res.json('captcha-xxx');
+function getFakeQrCode(req, res) {
+  const { prefix, scanType, key, action } = req.query;
+  res.status = 200;
+  return res.json({
+    statusCode: 1,
+    msg: {
+      qrCode: prefix + scanType + '/pages/auth/auth?key=' + key + '&action=' + action,
+      expire: 20,
+    }
+  });
 }
-
 let sourceData;
 const subjectColumn = [
   {
@@ -312,7 +319,7 @@ export default {
   'GET /api/tags': mockjs.mock({
     'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
   }),
-  'GET /api/captcha': getFakeCaptcha,
+  'GET /api/qrcode': getFakeQrCode,
   // add
   'GET /api/subject_column': getSubjectColumn,
   'POST /api/subject_column': postSubjectColumn,

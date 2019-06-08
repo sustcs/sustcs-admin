@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
-import { fakeAccountLogin, getFakeCaptcha } from '@/services/api';
+import { fakeAccountLogin, getFakeQrCode } from '@/services/api';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
@@ -10,6 +10,10 @@ export default {
 
   state: {
     status: undefined,
+    qrCode:{
+      expire: '',
+      qrCode: ""
+    },
   },
 
   effects: {
@@ -40,8 +44,12 @@ export default {
       }
     },
 
-    *getCaptcha({ payload }, { call }) {
-      yield call(getFakeCaptcha, payload);
+    *getQrCode({ payload }, { call, put }) {
+      const response = yield call(getFakeQrCode, payload);
+      yield put({
+        type: 'getCode',
+        payload: response ? response.msg : '',
+      });
     },
 
     *logout(_, { put }) {
@@ -74,7 +82,13 @@ export default {
       return {
         ...state,
         status: payload.status,
-        type: payload.type,
+        userInfo: payload.userInfo,
+      };
+    },
+    getCode(state, {payload}) {
+      return {
+        ...state,
+        qrCode: payload
       };
     },
   },

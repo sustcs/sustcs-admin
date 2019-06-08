@@ -73,26 +73,20 @@ export default {
     },
   ],
   'POST /api/login/account': (req, res) => {
-    const { password, userName, type } = req.body;
-    if (password === 'ant.design' && userName === 'admin') {
+    const { openid} = req.body;
+    var checkAuthority = true ;
+    if (checkAuthority) {
       res.send({
         status: 'ok',
-        type,
         currentAuthority: 'admin',
-      });
-      return;
-    }
-    if (password === 'ant.design' && userName === 'user') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'user',
+        userInfo: {
+          openid: openid
+        },        
       });
       return;
     }
     res.send({
       status: 'error',
-      type,
       currentAuthority: 'guest',
     });
   },
