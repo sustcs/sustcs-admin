@@ -74,13 +74,13 @@ export default {
   ],
   'POST /api/login/account': (req, res) => {
     const { openid} = req.body;
-    var checkAuthority = true ;
+    const checkAuthority = true ;
     if (checkAuthority) {
       res.send({
         status: 'ok',
         currentAuthority: 'admin',
         userInfo: {
-          openid: openid
+          openid
         },        
       });
       return;

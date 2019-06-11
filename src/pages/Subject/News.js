@@ -49,12 +49,13 @@ class App extends Component {
   };
 
   onLoadMore = () => {
+    let { data } = this.state;
     this.setState({
       loading: true,
-      list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
+      list: data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
     });
     this.getData(res => {
-      const data = this.state.data.concat(res.results);
+      data = data.concat(res.results);
       this.setState(
         {
           data,

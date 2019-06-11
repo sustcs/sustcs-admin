@@ -22,8 +22,6 @@ import {
   Row,
   Col,
   Statistic,
-  Result,
-  Button,
 } from 'antd';
 import moment from 'moment';
 import { TagCloud } from '@/components/Charts';
@@ -72,7 +70,8 @@ class Teacher extends React.Component {
    * @type modal
    */
   editModal = item => {
-    this.props.form.setFieldsValue({});
+    const { form } = this.props;
+    form.setFieldsValue({});
     this.setState({
       modalVisible: true,
       current: item,
@@ -499,7 +498,8 @@ class Teacher extends React.Component {
     const getModalContent = () => (
       <div>
         {done ? (
-          {/* <Result
+          {
+            /* <Result
             type="success"
             title="操作成功"
             description="一系列的信息描述，很短同样也可以带标点。"
@@ -509,7 +509,8 @@ class Teacher extends React.Component {
               </Button>
             }
             className={styles.formResult}
-          /> */}
+          /> */
+          }
         ) : (
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>

@@ -1,11 +1,10 @@
 import React, { memo } from 'react';
 import { Row, Col, Icon, Tooltip } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi-plugin-react/locale';
-import styles from './Analysis.less';
+import numeral from 'numeral';
 import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from '@/components/Charts';
 import Trend from '@/components/Trend';
-import numeral from 'numeral';
-import Yuan from '@/utils/Yuan';
+import styles from './Analysis.less';
 
 const topColResponsiveProps = {
   xs: 24,
@@ -21,7 +20,7 @@ const IntroduceRow = memo(({ loading, visitData }) => (
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
-        title={<FormattedMessage id="app.analysis.total-sales" defaultMessage="Total Sales" />}
+        title={<FormattedMessage id="app.analysis.total-users" defaultMessage="Total users" />}
         action={
           <Tooltip
             title={<FormattedMessage id="app.analysis.introduce" defaultMessage="Introduce" />}
@@ -30,11 +29,11 @@ const IntroduceRow = memo(({ loading, visitData }) => (
           </Tooltip>
         }
         loading={loading}
-        total={() => <Yuan>126560</Yuan>}
+        total={() => 126560}
         footer={
           <Field
-            label={<FormattedMessage id="app.analysis.day-sales" defaultMessage="Daily Sales" />}
-            value={`￥${numeral(12423).format('0,0')}`}
+            label={<FormattedMessage id="app.analysis.day-users" defaultMessage="Daily Sales" />}
+            value={`${numeral(0).format('0,0')}`}
           />
         }
         contentHeight={46}
@@ -95,7 +94,7 @@ const IntroduceRow = memo(({ loading, visitData }) => (
                 defaultMessage="Conversion Rate"
               />
             }
-            value="60%"
+            value="60"
           />
         }
         contentHeight={46}

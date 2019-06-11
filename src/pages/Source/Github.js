@@ -1,60 +1,24 @@
 import React from 'react';
 
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
-import { Tree, Card, Row, Col, Icon } from 'antd';
+import { Card, Row, Col, Icon } from 'antd';
 import Terminal from 'terminal-in-react';
 import styles from './Github.less';
 
-const { DirectoryTree } = Tree;
-const { TreeNode } = Tree;
 class Competitions extends React.Component {
   state = {
-    treeData: [
-      { title: 'Expand to load', key: '0' },
-      { title: 'Expand to load', key: '1' },
-      { title: 'Tree Node', key: '2', isLeaf: true },
-    ],
+    githubUrl: 'https://github.com/sustcs/course',
   };
-
-  onLoadData = treeNode =>
-    new Promise(resolve => {
-      if (treeNode.props.children) {
-        resolve();
-        return;
-      }
-      setTimeout(() => {
-        treeNode.props.dataRef.children = [
-          { title: 'Child Node', key: `${treeNode.props.eventKey}-0` },
-          { title: 'Child Node', key: `${treeNode.props.eventKey}-1` },
-        ];
-        this.setState({
-          treeData: [...this.state.treeData],
-        });
-        resolve();
-      }, 1000);
-    });
-
-  renderTreeNodes = data =>
-    data.map(item => {
-      if (item.children) {
-        return (
-          <TreeNode title={item.title} key={item.key} dataRef={item}>
-            {this.renderTreeNodes(item.children)}
-          </TreeNode>
-        );
-      }
-      return <TreeNode {...item} dataRef={item} />;
-    });
 
   render() {
     // data
-
+    const { githubUrl } = this.state;
     // component
     const content = (
       <div className={styles.pageHeaderContent}>
         <p>开源资料</p>
         <div className={styles.contentLink}>
-          <a href="https://sustcs.github.io/course">
+          <a href={githubUrl}>
             <Icon type="github" style={{ fontSize: 20 }} /> Github
           </a>
         </div>
@@ -100,9 +64,7 @@ class Competitions extends React.Component {
         <Row>
           <Col span={12}>
             <Card bordered={false} style={{ marginTop: 20, height: '100vh' }}>
-              <DirectoryTree loadData={this.onLoadData}>
-                {this.renderTreeNodes(this.state.treeData)}
-              </DirectoryTree>
+              treeNode
             </Card>
           </Col>
           <Col span={12}>

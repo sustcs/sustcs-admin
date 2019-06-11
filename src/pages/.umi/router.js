@@ -93,43 +93,8 @@ const routes = [
             "path": "/dashboard/analysis",
             "name": "analysis",
             "component": _dvaDynamic({
-  app: require('@tmp/dva').getApp(),
-models: () => [
-  import(/* webpackChunkName: 'p__Dashboard__models__activities.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/activities.js').then(m => { return { namespace: 'activities',...m.default}}),
-  import(/* webpackChunkName: 'p__Dashboard__models__chart.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/chart.js').then(m => { return { namespace: 'chart',...m.default}}),
-  import(/* webpackChunkName: 'p__Dashboard__models__monitor.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/monitor.js').then(m => { return { namespace: 'monitor',...m.default}})
-],
+  
   component: () => import(/* webpackChunkName: "p__Dashboard__Analysis" */'../Dashboard/Analysis'),
-  LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
-}),
-            "exact": true
-          },
-          {
-            "path": "/dashboard/monitor",
-            "name": "monitor",
-            "component": _dvaDynamic({
-  app: require('@tmp/dva').getApp(),
-models: () => [
-  import(/* webpackChunkName: 'p__Dashboard__models__activities.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/activities.js').then(m => { return { namespace: 'activities',...m.default}}),
-  import(/* webpackChunkName: 'p__Dashboard__models__chart.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/chart.js').then(m => { return { namespace: 'chart',...m.default}}),
-  import(/* webpackChunkName: 'p__Dashboard__models__monitor.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/monitor.js').then(m => { return { namespace: 'monitor',...m.default}})
-],
-  component: () => import(/* webpackChunkName: "p__Dashboard__Monitor" */'../Dashboard/Monitor'),
-  LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
-}),
-            "exact": true
-          },
-          {
-            "path": "/dashboard/workplace",
-            "name": "workplace",
-            "component": _dvaDynamic({
-  app: require('@tmp/dva').getApp(),
-models: () => [
-  import(/* webpackChunkName: 'p__Dashboard__models__activities.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/activities.js').then(m => { return { namespace: 'activities',...m.default}}),
-  import(/* webpackChunkName: 'p__Dashboard__models__chart.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/chart.js').then(m => { return { namespace: 'chart',...m.default}}),
-  import(/* webpackChunkName: 'p__Dashboard__models__monitor.js' */'/home/jerry/data/react/antd/admin/src/pages/Dashboard/models/monitor.js').then(m => { return { namespace: 'monitor',...m.default}})
-],
-  component: () => import(/* webpackChunkName: "p__Dashboard__Workplace" */'../Dashboard/Workplace'),
   LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
 }),
             "exact": true

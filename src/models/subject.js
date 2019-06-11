@@ -1,5 +1,5 @@
 import {
-  querySubjectColumn,
+  listSubjectColumn,
   addSubjectColumn,
   removeSubjectColumn,
   updateSubjectColumn,
@@ -14,7 +14,7 @@ export default {
 
   effects: {
     *fetch({ payload }, { call, put }) {
-      const response = yield call(querySubjectColumn, payload);
+      const response = yield call(listSubjectColumn, payload);
       yield put({
         type: 'queryList',
         payload: Array.isArray(response) ? response : [],

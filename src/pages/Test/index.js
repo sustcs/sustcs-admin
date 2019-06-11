@@ -16,6 +16,7 @@ class FilterCardList extends PureComponent {
   };
 
   render() {
+    const { visible } = this.state;
     const DescriptionItem = ({ title, content }) => (
       <div
         style={{
@@ -67,7 +68,7 @@ class FilterCardList extends PureComponent {
           placement="right"
           closable={false}
           onClose={this.onClose}
-          visible={this.state.visible}
+          visible={visible}
         >
           <Row>
             <Col span={12}>

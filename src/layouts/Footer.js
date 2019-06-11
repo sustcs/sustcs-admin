@@ -29,7 +29,8 @@ const FooterView = () => (
       ]}
       copyright={
         <Fragment>
-          Copyright <Icon type="copyright" />2019 {formatMessage({ id: 'component.globalFooter.copyright' })}  
+          Copyright <Icon type="copyright" />
+          2019 {formatMessage({ id: 'component.globalFooter.copyright' })}
         </Fragment>
       }
     />

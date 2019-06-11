@@ -49,9 +49,10 @@ class CardList extends PureComponent {
   }
 
   editDrawer = item => {
-    this.props.form.setFieldsValue({
+    const { form } = this.props;
+    form.setFieldsValue({
       title: item.title,
-      enable: item.enable,
+      enable: item.enable === 1,
       description: BraftEditor.createEditorState(item.description),
     });
     this.setState({
@@ -61,9 +62,10 @@ class CardList extends PureComponent {
   };
 
   createDrawer = () => {
-    this.props.form.setFieldsValue({
+    const { form } = this.props;
+    form.setFieldsValue({
       title: '',
-      enable: false,
+      enable: true,
       description: BraftEditor.createEditorState(null),
     });
     this.setState({
@@ -85,8 +87,6 @@ class CardList extends PureComponent {
     const { dispatch, form } = this.props;
     const { current } = this.state;
     const id = current ? current.id : '';
-
-    setTimeout(() => this.addBtn.blur(), 0);
     form.validateFields((err, fieldsValue) => {
       if (!err) {
         this.setState({
@@ -95,6 +95,7 @@ class CardList extends PureComponent {
         const submitData = {
           title: fieldsValue.title,
           description: fieldsValue.description.toHTML(),
+          enable: fieldsValue.enable,
         };
         dispatch({
           type: 'subject/submit',
@@ -113,12 +114,10 @@ class CardList extends PureComponent {
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
-    const {
-      subject: { list },
-      loading,
-    } = this.props;
-    const { done, current = {} } = this.state;
+    const { form, subject, loading } = this.props;
+    const { list } = subject;
+    const { getFieldDecorator } = form;
+    const { done, current = {}, visible } = this.state;
     const content = (
       <div className={styles.pageHeaderContent}>
         <p>用于专业简介栏目</p>
@@ -253,14 +252,19 @@ class CardList extends PureComponent {
                         <Switch
                           checkedChildren="启用"
                           unCheckedChildren="下线"
-                          defaultChecked={item.enable}
+                          defaultChecked={item.enable === 1}
                         />
                         ,
                       </Tooltip>,
                     ]}
                   >
                     <Card.Meta
-                      avatar={<Avatar size="small" src={item.avatar} />}
+                      avatar={
+                        <Avatar
+                          size="small"
+                          src="http://www.sust.edu.cn/_mediafile/sust2018/2015/08/06/3lwd2p0kr1.jpg"
+                        />
+                      }
                       title={<a>{item.title}</a>}
                       description={
                         <Ellipsis className={styles.item} lines={3}>
@@ -293,7 +297,7 @@ class CardList extends PureComponent {
           title={done ? null : `${current.id === undefined ? 'Create' : 'Edit'} a column`}
           width={720}
           onClose={this.onClose}
-          visible={this.state.visible}
+          visible={visible}
         >
           {getDrawerContent()}
         </Drawer>

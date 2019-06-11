@@ -18,7 +18,6 @@ import {
   Upload,
   Input,
   Select,
-  Result,
 } from 'antd';
 
 import moment from 'moment';
@@ -83,7 +82,8 @@ class Competitions extends React.Component {
    * @type modal
    */
   editModal = item => {
-    this.props.form.setFieldsValue({});
+    const { form } = this.props;
+    form.setFieldsValue({});
     this.setState({
       modalVisible: true,
       current: item,
@@ -162,7 +162,7 @@ class Competitions extends React.Component {
       fileList,
     } = this.state;
     const listData = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i += 1) {
       listData.push({
         href: 'http://ant.design',
         title: `ant design part ${i}`,
@@ -276,7 +276,6 @@ class Competitions extends React.Component {
           },
           {
             id: '008',
-            member: ['Jack', 'John', 'Mike'],
             title: 'test2',
             member: [
               {
@@ -492,7 +491,8 @@ class Competitions extends React.Component {
     const getModalContent = () => (
       <div>
         {done ? (
-          {/* <Result
+          {
+            /* <Result
             type="success"
             title="操作成功"
             description="一系列的信息描述，很短同样也可以带标点。"
@@ -502,7 +502,8 @@ class Competitions extends React.Component {
               </Button>
             }
             className={styles.formResult}
-          /> */}
+          /> */
+          }
         ) : (
           <Form layout="vertical" hideRequiredMark>
             <Row gutter={16}>
@@ -641,9 +642,6 @@ class Competitions extends React.Component {
                     type="delete"
                     onClick={e => {
                       e.preventDefault();
-                      {
-                        /* this.deleteItem(item.id); */
-                      }
                     }}
                   />,
                   <a href={item.githubUrl}>

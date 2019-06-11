@@ -19,7 +19,8 @@ export function _onCreate() {
     app.use(plugin);
   });
   
-  app.model({ namespace: 'global', ...(require('/home/jerry/data/react/antd/admin/src/models/global.js').default) });
+  app.model({ namespace: 'chart', ...(require('/home/jerry/data/react/antd/admin/src/models/chart.js').default) });
+app.model({ namespace: 'global', ...(require('/home/jerry/data/react/antd/admin/src/models/global.js').default) });
 app.model({ namespace: 'list', ...(require('/home/jerry/data/react/antd/admin/src/models/list.js').default) });
 app.model({ namespace: 'login', ...(require('/home/jerry/data/react/antd/admin/src/models/login.js').default) });
 app.model({ namespace: 'menu', ...(require('/home/jerry/data/react/antd/admin/src/models/menu.js').default) });
