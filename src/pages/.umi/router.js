@@ -80,7 +80,7 @@ const routes = [
         "redirect": "/dashboard/analysis",
         "authority": [
           "admin",
-          "user"
+          "teacher"
         ],
         "exact": true
       },
@@ -105,36 +105,36 @@ const routes = [
         ]
       },
       {
-        "path": "/subject",
+        "path": "/faculty",
         "icon": "sketch",
-        "name": "subject",
+        "name": "faculty",
         "routes": [
           {
-            "path": "/subject/subject-column",
-            "name": "subjectcolumn",
+            "path": "/faculty/introduction",
+            "name": "introduction",
             "component": _dvaDynamic({
   
-  component: () => import(/* webpackChunkName: "p__Subject__SubjectColumn" */'../Subject/SubjectColumn'),
+  component: () => import(/* webpackChunkName: "p__Faculty__Introduction" */'../Faculty/Introduction'),
   LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
 }),
             "exact": true
           },
           {
-            "path": "/subject/teacher",
+            "path": "/faculty/teacher",
             "name": "teacher",
             "component": _dvaDynamic({
   
-  component: () => import(/* webpackChunkName: "p__Subject__Teacher" */'../Subject/Teacher'),
+  component: () => import(/* webpackChunkName: "p__Faculty__Teacher" */'../Faculty/Teacher'),
   LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
 }),
             "exact": true
           },
           {
-            "path": "/subject/news",
+            "path": "/faculty/news",
             "name": "news",
             "component": _dvaDynamic({
   
-  component: () => import(/* webpackChunkName: "p__Subject__News" */'../Subject/News'),
+  component: () => import(/* webpackChunkName: "p__Faculty__News" */'../Faculty/News'),
   LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
 }),
             "exact": true
@@ -150,41 +150,21 @@ const routes = [
         "name": "course",
         "routes": [
           {
-            "path": "/course/courses",
-            "name": "courses",
+            "path": "/course/all",
+            "name": "course",
             "component": _dvaDynamic({
   
-  component: () => import(/* webpackChunkName: "p__Course__Courses" */'../Course/Courses'),
+  component: () => import(/* webpackChunkName: "p__Course__Course" */'../Course/Course'),
   LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
 }),
             "exact": true
           },
           {
-            "path": "/course/setting",
-            "name": "setting",
+            "path": "/course/structure",
+            "name": "structure",
             "component": _dvaDynamic({
   
-  component: () => import(/* webpackChunkName: "p__Course__Setting" */'../Course/Setting'),
-  LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
-}),
-            "exact": true
-          },
-          {
-            "component": () => React.createElement(require('/home/jerry/data/react/antd/admin/node_modules/_umi-build-dev@1.9.2@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
-          }
-        ]
-      },
-      {
-        "path": "/activity",
-        "icon": "compass",
-        "name": "activity",
-        "routes": [
-          {
-            "path": "/activity/seminar",
-            "name": "seminar",
-            "component": _dvaDynamic({
-  
-  component: () => import(/* webpackChunkName: "p__Activity__Seminar" */'../Activity/Seminar'),
+  component: () => import(/* webpackChunkName: "p__Course__Structure" */'../Course/Structure'),
   LoadingComponent: require('/home/jerry/data/react/antd/admin/src/components/PageLoading/index').default,
 }),
             "exact": true

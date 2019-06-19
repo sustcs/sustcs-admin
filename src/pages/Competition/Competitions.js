@@ -167,7 +167,7 @@ class Competitions extends React.Component {
         href: 'http://ant.design',
         title: `ant design part ${i}`,
         poster: 'http://www.appcontest.net/2019/images/ReviewImg04.png',
-        description:
+        synopsis:
           'Ant Design, a design language for background applications, is refined by Ant UED Team.Ant Design, a design language for background applications, is refined by Ant UED Team.Ant Design, a design language for background applications, is refined by Ant UED Team.',
         createdAt: new Date().getDate(),
         type: 'city',
@@ -559,9 +559,9 @@ class Competitions extends React.Component {
             </Row>
             <Row gutter={16}>
               <Col>
-                <Form.Item label="Description">
-                  {getFieldDecorator('description', {
-                    rules: [{ required: true, message: 'Please enter description' }],
+                <Form.Item label="Synopsis">
+                  {getFieldDecorator('synopsis', {
+                    rules: [{ required: true, message: 'Please enter synopsis' }],
                   })(<TextArea rows={3} />)}
                 </Form.Item>
               </Col>
@@ -584,22 +584,22 @@ class Competitions extends React.Component {
             </Row>
             <Row gutter={16}>
               <Col>
-                <Form.Item label="Introduction">
-                  {getFieldDecorator('introduction', {
+                <Form.Item label="Description">
+                  {getFieldDecorator('description', {
                     validateTrigger: 'onBlur',
                     rules: [
                       {
                         required: true,
                         validator: (_, value, callback) => {
                           if (value.isEmpty()) {
-                            callback('please enter column introduction');
+                            callback('please enter column description');
                           } else {
                             callback();
                           }
                         },
                       },
                     ],
-                  })(<BraftEditor placeholder="please enter column introduction" />)}
+                  })(<BraftEditor placeholder="please enter column description" />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -670,7 +670,7 @@ class Competitions extends React.Component {
                   description={`发布于${moment(item.createdAt).format('YYYY-MM-DD HH:mm')}`}
                 />
                 <Ellipsis className={styles.item} lines={1}>
-                  {item.description}
+                  {item.synopsis}
                 </Ellipsis>
               </List.Item>
             )}

@@ -27,7 +27,7 @@ export default [
     Routes: ['src/pages/Authorized'],
     routes: [
       // dashboard
-      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'user'] },
+      { path: '/', redirect: '/dashboard/analysis', authority: ['admin', 'teacher'] },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -38,39 +38,29 @@ export default [
             name: 'analysis',
             component: './Dashboard/Analysis',
           },
-          // {
-          //   path: '/dashboard/monitor',
-          //   name: 'monitor',
-          //   component: './Dashboard/Monitor',
-          // },
-          // {
-          //   path: '/dashboard/workplace',
-          //   name: 'workplace',
-          //   component: './Dashboard/Workplace',
-          // },
         ],
       },
 
-      // subject
+      // faculty
       {
-        path: '/subject',
+        path: '/faculty',
         icon: 'sketch',
-        name: 'subject',
+        name: 'faculty',
         routes: [
           {
-            path: '/subject/subject-column',
-            name: 'subjectcolumn',
-            component: './Subject/SubjectColumn',
+            path: '/faculty/introduction',
+            name: 'introduction',
+            component: './Faculty/Introduction',
           },
           {
-            path: '/subject/teacher',
+            path: '/faculty/teacher',
             name: 'teacher',
-            component: './Subject/Teacher',
+            component: './Faculty/Teacher',
           },
           {
-            path: '/subject/news',
+            path: '/faculty/news',
             name: 'news',
-            component: './Subject/News',
+            component: './Faculty/News',
           },
         ],
       },
@@ -81,30 +71,30 @@ export default [
         name: 'course',
         routes: [
           {
-            path: '/course/courses',
-            name: 'courses',
-            component: './Course/Courses',
+            path: '/course/all',
+            name: 'course',
+            component: './Course/Course',
           },
           {
-            path: '/course/setting',
-            name: 'setting',
-            component: './Course/Setting',
+            path: '/course/structure',
+            name: 'structure',
+            component: './Course/Structure',
           },
         ],
       },
       // activity
-      {
-        path: '/activity',
-        icon: 'compass',
-        name: 'activity',
-        routes: [
-          {
-            path: '/activity/seminar',
-            name: 'seminar',
-            component: './Activity/Seminar',
-          },
-        ],
-      },
+      // {
+      //   path: '/activity',
+      //   icon: 'compass',
+      //   name: 'activity',
+      //   routes: [
+      //     {
+      //       path: '/activity/seminar',
+      //       name: 'seminar',
+      //       component: './Activity/Seminar',
+      //     },
+      //   ],
+      // },
       // competition
       {
         path: '/competition',

@@ -2361,17 +2361,17 @@
 }
 
 /* 
-  Convert to from  src/pages/Course/Courses.less
+  Convert to from  src/pages/Course/Course.less
  */
-.antd-pro-pages-course-courses-avatar-uploader
-  > .antd-pro-pages-course-courses-ant-upload {
+.antd-pro-pages-course-course-avatar-uploader
+  > .antd-pro-pages-course-course-ant-upload {
   width: 128px;
   height: 128px;
 }
-.antd-pro-pages-course-courses-coverCardList {
+.antd-pro-pages-course-course-coverCardList {
   margin-bottom: -24px;
 
-  .antd-pro-pages-course-courses-card {
+  .antd-pro-pages-course-course-card {
     .ant-card-meta-title {
       margin-bottom: 4px;
       & > a {
@@ -2393,7 +2393,7 @@
     }
   }
 
-  .antd-pro-pages-course-courses-cardItemContent {
+  .antd-pro-pages-course-course-cardItemContent {
     display: flex;
     height: 20px;
     margin-top: 16px;
@@ -2404,18 +2404,18 @@
       color: @text-color-secondary;
       font-size: 12px;
     }
-    .antd-pro-pages-course-courses-avatarList {
+    .antd-pro-pages-course-course-avatarList {
       flex: 0 1 auto;
     }
   }
-  .antd-pro-pages-course-courses-cardList {
+  .antd-pro-pages-course-course-cardList {
     margin-top: 24px;
   }
   .ant-list .ant-list-item-content-single {
     max-width: 100%;
   }
 }
-.antd-pro-pages-course-courses-headerInfo {
+.antd-pro-pages-course-course-headerInfo {
   position: relative;
   text-align: center;
   & > span {
@@ -2442,8 +2442,53 @@
 }
 
 /* 
-  Convert to from  src/pages/Course/Setting.less
+  Convert to from  src/pages/Course/Structure.less
  */
+
+.antd-pro-pages-course-structure-tableList {
+  .antd-pro-pages-course-structure-tableListOperator {
+    margin-bottom: 16px;
+    button {
+      margin-right: 8px;
+    }
+  }
+}
+
+.antd-pro-pages-course-structure-tableListForm {
+  .ant-form-item {
+    display: flex;
+    margin-right: 0;
+    margin-bottom: 24px;
+    > .ant-form-item-label {
+      width: auto;
+      padding-right: 8px;
+      line-height: 32px;
+    }
+    .ant-form-item-control {
+      line-height: 32px;
+    }
+  }
+  .ant-form-item-control-wrapper {
+    flex: 1;
+  }
+  .antd-pro-pages-course-structure-submitButtons {
+    display: block;
+    margin-bottom: 24px;
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 24px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 8px;
+  }
+}
 
 /* 
   Convert to from  src/pages/Dashboard/Analysis.less
@@ -2637,6 +2682,297 @@
 }
 
 /* 
+  Convert to from  src/pages/Faculty/Introduction.less
+ */
+
+.antd-pro-pages-faculty-introduction-cardList {
+  margin-bottom: -24px;
+
+  .antd-pro-pages-faculty-introduction-card {
+    .ant-card-meta-title {
+      margin-bottom: 12px;
+      & > a {
+        display: inline-block;
+        max-width: 100%;
+        color: @heading-color;
+      }
+    }
+    .ant-card-actions {
+      background: #f7f9fa;
+    }
+    .ant-card-body:hover {
+      .ant-card-meta-title > a {
+        color: @primary-color;
+      }
+    }
+  }
+  .antd-pro-pages-faculty-introduction-item {
+    height: 64px;
+  }
+  .ant-list .ant-list-item-content-single {
+    max-width: 100%;
+  }
+}
+
+.antd-pro-pages-faculty-introduction-extraImg {
+  width: 195px;
+  margin-top: -60px;
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+.antd-pro-pages-faculty-introduction-newButton {
+  width: 100%;
+  height: 126px;
+  color: @text-color-secondary;
+  background-color: #fff;
+  border-color: @border-color-base;
+  border-radius: @border-radius-sm;
+}
+
+.antd-pro-pages-faculty-introduction-cardAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+}
+
+.antd-pro-pages-faculty-introduction-cardDescription {
+  .textOverflowMulti();
+}
+
+.antd-pro-pages-faculty-introduction-pageHeaderContent {
+  position: relative;
+}
+
+.antd-pro-pages-faculty-introduction-contentLink {
+  margin-top: 16px;
+  a {
+    margin-right: 32px;
+    img {
+      width: 24px;
+    }
+  }
+  img {
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .antd-pro-pages-faculty-introduction-contentLink {
+    a {
+      margin-right: 16px;
+    }
+  }
+}
+@media screen and (max-width: @screen-md) {
+  .antd-pro-pages-faculty-introduction-extraImg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .antd-pro-pages-faculty-introduction-pageHeaderContent {
+    padding-bottom: 30px;
+  }
+  .antd-pro-pages-faculty-introduction-contentLink {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 1000px;
+    a {
+      margin-right: 16px;
+    }
+    img {
+      margin-right: 4px;
+    }
+  }
+}
+
+/* 
+  Convert to from  src/pages/Faculty/News.less
+ */
+.antd-pro-pages-faculty-news-listContent {
+  font-size: 0;
+  .antd-pro-pages-faculty-news-listContentItem {
+    display: inline-block;
+    margin-left: 40px;
+    color: @text-color-secondary;
+    font-size: @font-size-base;
+    vertical-align: middle;
+    > span {
+      line-height: 20px;
+    }
+    > p {
+      margin-top: 4px;
+      margin-bottom: 0;
+      line-height: 22px;
+    }
+  }
+}
+
+/* 
+  Convert to from  src/pages/Faculty/Teacher.less
+ */
+.antd-pro-pages-faculty-teacher-pageHeaderContent {
+  position: relative;
+}
+@media screen and (max-width: @screen-md) {
+  .antd-pro-pages-faculty-teacher-extraImg {
+    display: none;
+  }
+}
+@media screen and (max-width: @screen-lg) {
+  .antd-pro-pages-faculty-teacher-contentLink {
+    a {
+      margin-right: 16px;
+    }
+  }
+}
+@media screen and (max-width: @screen-sm) {
+  .antd-pro-pages-faculty-teacher-pageHeaderContent {
+    padding-bottom: 30px;
+  }
+  .antd-pro-pages-faculty-teacher-contentLink {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 1000px;
+    a {
+      margin-right: 16px;
+    }
+    img {
+      margin-right: 4px;
+    }
+  }
+  .antd-pro-pages-faculty-teacher-headerInfo {
+    margin-bottom: 16px;
+    & > em {
+      display: none;
+    }
+  }
+}
+.antd-pro-pages-faculty-teacher-cardList {
+  margin-bottom: -24px;
+
+  .antd-pro-pages-faculty-teacher-card {
+    .ant-card-meta-title {
+      margin-bottom: 12px;
+      & > a {
+        display: inline-block;
+        max-width: 100%;
+        color: @heading-color;
+      }
+    }
+    .ant-card-actions {
+      background: #f7f9fa;
+    }
+    .ant-card-body:hover {
+      .ant-card-meta-title > a {
+        color: @primary-color;
+      }
+    }
+  }
+  .antd-pro-pages-faculty-teacher-item {
+    height: 64px;
+  }
+  .ant-list .ant-list-item-content-single {
+    max-width: 100%;
+  }
+}
+.antd-pro-pages-faculty-teacher-extraImg {
+  width: 195px;
+  margin-top: -60px;
+  text-align: center;
+  img {
+    width: 100%;
+  }
+}
+
+.antd-pro-pages-faculty-teacher-avatarHolder {
+  margin-bottom: 24px;
+  text-align: center;
+
+  & > img {
+    width: 104px;
+    height: 104px;
+    margin-bottom: 20px;
+  }
+
+  .antd-pro-pages-faculty-teacher-name {
+    margin-bottom: 4px;
+    color: @heading-color;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+.antd-pro-pages-faculty-teacher-detail {
+  p {
+    position: relative;
+    margin-bottom: 8px;
+    padding-left: 26px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.antd-pro-pages-faculty-teacher-tagsTitle　 {
+  margin-bottom: 12px;
+  color: @heading-color;
+  font-weight: 500;
+}
+.antd-pro-pages-faculty-teacher-tags {
+  .ant-tag {
+    margin-bottom: 8px;
+  }
+}
+
+.antd-pro-pages-faculty-teacher-contentLink {
+  margin-top: 16px;
+  a {
+    margin-right: 32px;
+    img {
+      width: 24px;
+    }
+  }
+  img {
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+}
+.antd-pro-pages-faculty-teacher-headerInfo {
+  position: relative;
+  text-align: center;
+  & > span {
+    display: inline-block;
+    margin-bottom: 4px;
+    color: @text-color-secondary;
+    font-size: @font-size-base;
+    line-height: 22px;
+  }
+  & > p {
+    margin: 0;
+    color: @heading-color;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  & > em {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 56px;
+    background-color: @border-color-split;
+  }
+}
+
+/* 
   Convert to from  src/pages/Source/Github.less
  */
 .antd-pro-pages-source-github-headerInfo {
@@ -2676,297 +3012,6 @@
 @media screen and (max-width: @screen-md) {
   .antd-pro-pages-source-github-extraImg {
     display: none;
-  }
-}
-
-/* 
-  Convert to from  src/pages/Subject/News.less
- */
-.antd-pro-pages-subject-news-listContent {
-  font-size: 0;
-  .antd-pro-pages-subject-news-listContentItem {
-    display: inline-block;
-    margin-left: 40px;
-    color: @text-color-secondary;
-    font-size: @font-size-base;
-    vertical-align: middle;
-    > span {
-      line-height: 20px;
-    }
-    > p {
-      margin-top: 4px;
-      margin-bottom: 0;
-      line-height: 22px;
-    }
-  }
-}
-
-/* 
-  Convert to from  src/pages/Subject/SubjectColumn.less
- */
-
-.antd-pro-pages-subject-subject-column-cardList {
-  margin-bottom: -24px;
-
-  .antd-pro-pages-subject-subject-column-card {
-    .ant-card-meta-title {
-      margin-bottom: 12px;
-      & > a {
-        display: inline-block;
-        max-width: 100%;
-        color: @heading-color;
-      }
-    }
-    .ant-card-actions {
-      background: #f7f9fa;
-    }
-    .ant-card-body:hover {
-      .ant-card-meta-title > a {
-        color: @primary-color;
-      }
-    }
-  }
-  .antd-pro-pages-subject-subject-column-item {
-    height: 64px;
-  }
-  .ant-list .ant-list-item-content-single {
-    max-width: 100%;
-  }
-}
-
-.antd-pro-pages-subject-subject-column-extraImg {
-  width: 195px;
-  margin-top: -60px;
-  text-align: center;
-  img {
-    width: 100%;
-  }
-}
-
-.antd-pro-pages-subject-subject-column-newButton {
-  width: 100%;
-  height: 188px;
-  color: @text-color-secondary;
-  background-color: #fff;
-  border-color: @border-color-base;
-  border-radius: @border-radius-sm;
-}
-
-.antd-pro-pages-subject-subject-column-cardAvatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 48px;
-}
-
-.antd-pro-pages-subject-subject-column-cardDescription {
-  .textOverflowMulti();
-}
-
-.antd-pro-pages-subject-subject-column-pageHeaderContent {
-  position: relative;
-}
-
-.antd-pro-pages-subject-subject-column-contentLink {
-  margin-top: 16px;
-  a {
-    margin-right: 32px;
-    img {
-      width: 24px;
-    }
-  }
-  img {
-    margin-right: 8px;
-    vertical-align: middle;
-  }
-}
-
-@media screen and (max-width: @screen-lg) {
-  .antd-pro-pages-subject-subject-column-contentLink {
-    a {
-      margin-right: 16px;
-    }
-  }
-}
-@media screen and (max-width: @screen-md) {
-  .antd-pro-pages-subject-subject-column-extraImg {
-    display: none;
-  }
-}
-
-@media screen and (max-width: @screen-sm) {
-  .antd-pro-pages-subject-subject-column-pageHeaderContent {
-    padding-bottom: 30px;
-  }
-  .antd-pro-pages-subject-subject-column-contentLink {
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 1000px;
-    a {
-      margin-right: 16px;
-    }
-    img {
-      margin-right: 4px;
-    }
-  }
-}
-
-/* 
-  Convert to from  src/pages/Subject/Teacher.less
- */
-.antd-pro-pages-subject-teacher-pageHeaderContent {
-  position: relative;
-}
-@media screen and (max-width: @screen-md) {
-  .antd-pro-pages-subject-teacher-extraImg {
-    display: none;
-  }
-}
-@media screen and (max-width: @screen-lg) {
-  .antd-pro-pages-subject-teacher-contentLink {
-    a {
-      margin-right: 16px;
-    }
-  }
-}
-@media screen and (max-width: @screen-sm) {
-  .antd-pro-pages-subject-teacher-pageHeaderContent {
-    padding-bottom: 30px;
-  }
-  .antd-pro-pages-subject-teacher-contentLink {
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 1000px;
-    a {
-      margin-right: 16px;
-    }
-    img {
-      margin-right: 4px;
-    }
-  }
-  .antd-pro-pages-subject-teacher-headerInfo {
-    margin-bottom: 16px;
-    & > em {
-      display: none;
-    }
-  }
-}
-.antd-pro-pages-subject-teacher-cardList {
-  margin-bottom: -24px;
-
-  .antd-pro-pages-subject-teacher-card {
-    .ant-card-meta-title {
-      margin-bottom: 12px;
-      & > a {
-        display: inline-block;
-        max-width: 100%;
-        color: @heading-color;
-      }
-    }
-    .ant-card-actions {
-      background: #f7f9fa;
-    }
-    .ant-card-body:hover {
-      .ant-card-meta-title > a {
-        color: @primary-color;
-      }
-    }
-  }
-  .antd-pro-pages-subject-teacher-item {
-    height: 64px;
-  }
-  .ant-list .ant-list-item-content-single {
-    max-width: 100%;
-  }
-}
-.antd-pro-pages-subject-teacher-extraImg {
-  width: 195px;
-  margin-top: -60px;
-  text-align: center;
-  img {
-    width: 100%;
-  }
-}
-
-.antd-pro-pages-subject-teacher-avatarHolder {
-  margin-bottom: 24px;
-  text-align: center;
-
-  & > img {
-    width: 104px;
-    height: 104px;
-    margin-bottom: 20px;
-  }
-
-  .antd-pro-pages-subject-teacher-name {
-    margin-bottom: 4px;
-    color: @heading-color;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 28px;
-  }
-}
-
-.antd-pro-pages-subject-teacher-detail {
-  p {
-    position: relative;
-    margin-bottom: 8px;
-    padding-left: 26px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-.antd-pro-pages-subject-teacher-tagsTitle　 {
-  margin-bottom: 12px;
-  color: @heading-color;
-  font-weight: 500;
-}
-.antd-pro-pages-subject-teacher-tags {
-  .ant-tag {
-    margin-bottom: 8px;
-  }
-}
-
-.antd-pro-pages-subject-teacher-contentLink {
-  margin-top: 16px;
-  a {
-    margin-right: 32px;
-    img {
-      width: 24px;
-    }
-  }
-  img {
-    margin-right: 8px;
-    vertical-align: middle;
-  }
-}
-.antd-pro-pages-subject-teacher-headerInfo {
-  position: relative;
-  text-align: center;
-  & > span {
-    display: inline-block;
-    margin-bottom: 4px;
-    color: @text-color-secondary;
-    font-size: @font-size-base;
-    line-height: 22px;
-  }
-  & > p {
-    margin: 0;
-    color: @heading-color;
-    font-size: 24px;
-    line-height: 32px;
-  }
-  & > em {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1px;
-    height: 56px;
-    background-color: @border-color-split;
   }
 }
 

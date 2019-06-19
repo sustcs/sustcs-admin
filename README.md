@@ -11,3 +11,15 @@
       "pre-commit": "npm run lint-staged"
     }
   },
+
+# 文件上传
+React Upload -> nodejs -> cos
+                       -> server
+                       -> mysql
+
+# 删除修改新增操作后视图如何更新
+再次dispatch?
+
+
+- [] 细化异常处理
+- [] camelcase

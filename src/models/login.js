@@ -1,6 +1,7 @@
 import { routerRedux } from 'dva/router';
 import { stringify } from 'qs';
-import { fakeAccountLogin, getQrCode } from '@/services/api';
+import { getQrCode } from '@/services/api';
+import { login } from '@/services/user';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { reloadAuthorized } from '@/utils/Authorized';
@@ -17,14 +18,22 @@ export default {
   },
 
   effects: {
+    *auth({ payload }, { call, put }) {
+      const response = yield call(getQrCode, payload);
+      yield put({
+        type: 'getCode',
+        payload: response.statusCode === 200 ? response.msg : 'paramError',
+      });
+    },
+
     *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
+      const response = yield call(login, payload);
       yield put({
         type: 'changeLoginStatus',
-        payload: response,
+        payload: response.msg,
       });
       // Login successfully
-      if (response.status === 'ok') {
+      if (response.msg.status === 'ok') {
         reloadAuthorized();
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
@@ -42,14 +51,6 @@ export default {
         }
         yield put(routerRedux.replace(redirect || '/'));
       }
-    },
-
-    *auth({ payload }, { call, put }) {
-      const response = yield call(getQrCode, payload);
-      yield put({
-        type: 'getCode',
-        payload: response ? response.msg : '',
-      });
     },
 
     *logout(_, { put }) {

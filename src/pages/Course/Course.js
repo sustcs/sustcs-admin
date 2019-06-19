@@ -16,9 +16,9 @@ import {
 } from 'antd';
 import Ellipsis from '@/components/Ellipsis';
 import moment from 'moment';
-import styles from './Courses.less';
+import styles from './Course.less';
 
-class Courses extends React.Component {
+class Course extends React.Component {
   state = {
     currentTab: 'all',
     drawerVisible: false,
@@ -243,9 +243,9 @@ class Courses extends React.Component {
           onSearch={this.handleFormSubmit}
           style={{ maxWidth: 522, width: '100%' }}
         />
-        <Button type="primary" size="large" style={{ marginLeft: 20 }}>
-          新增
-        </Button>
+          <Button type="primary" size="large" style={{ marginLeft: 20 }}>
+            新建
+          </Button>
       </div>
     );
     const MyIcon = Icon.createFromIconfontCN({
@@ -370,4 +370,4 @@ class Courses extends React.Component {
   }
 }
 
-export default Courses;
+export default Course;

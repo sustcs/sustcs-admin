@@ -6,45 +6,49 @@ export async function getQrCode(params = {}) {
 }
 
 export async function listSubjectColumn() {
-  return request('/api/introductions');
+  return request('/server/introductions');
 }
 
-export async function addSubjectColumn(params) {
-  const { ...restParams } = params;
+export async function createSubjectColumn(params) {
   return request(`/server/introductions`, {
     method: 'POST',
-    data: {
-      ...restParams,
-      method: 'post',
-    },
+    data: params,
   });
 }
 
-export async function removeSubjectColumn(params) {
-  const { ...restParams } = params;
+export async function destroySubjectColumn(params) {
   return request(`/server/introductions/${params.id}`, {
     method: 'DELETE',
-    data: {
-      ...restParams,
-      method: 'delete',
-    },
   });
 }
 
 export async function updateSubjectColumn(params) {
-  const { ...restParams } = params;
   return request(`/server/introductions/${params.id}`, {
     method: 'PUT',
-    data: {
-      ...restParams,
-      method: 'update',
-    },
+    data: params,
   });
 }
 
-export async function fakeAccountLogin(params) {
-  return request('/api/login/account', {
+export async function listTeachers() {
+  return request('/server/teachers');
+}
+
+export async function createTeachers(params) {
+  return request(`/server/teachers`, {
     method: 'POST',
+    data: params,
+  });
+}
+
+export async function destroyTeachers(params) {
+  return request(`/server/teachers/${params.id}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function updateTeachers(params) {
+  return request(`/server/teachers/${params.id}`, {
+    method: 'PUT',
     data: params,
   });
 }

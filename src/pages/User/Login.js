@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, message, Button, Tooltip } from 'antd';
+import { Card, message, Button, Tooltip, Alert } from 'antd';
 import uuidv1 from 'uuid/v1';
 import { formatMessage } from 'umi-plugin-react/locale';
 import QRCode from 'qrcode.react';
@@ -10,8 +10,9 @@ import styles from './Login.less';
 const clientUrl = 'http://localhost:8000/'; // QRcode prefix
 const serverUrl = 'http://localhost:7001/'; // fetch QRcode ,io
 let isExpired = null;
-@connect(({ login }) => ({
+@connect(({ login, loading }) => ({
   login,
+  submitting: loading.effects['login/login'],
 }))
 class LoginPage extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class LoginPage extends Component {
     const {
       login: { qrCode },
     } = this.props;
+
     const that = this;
     if (qrCode.expire !== '') {
       isExpired = setTimeout(() => {
@@ -39,6 +41,13 @@ class LoginPage extends Component {
       }, qrCode.expire * 1000);
 
       this.createConnect(uuid, qrCode.expire);
+    }
+  }
+
+  componentWillUnmount() {
+    if (isExpired !== null) {
+      clearTimeout(isExpired);
+      isExpired = null;
     }
   }
 
@@ -121,19 +130,23 @@ class LoginPage extends Component {
 
   render() {
     const {
-      login: { qrCode, status, userInfo },
+      login: { qrCode, status },
+      submitting,
     } = this.props;
-    if (status === 'ok') {
-      message.success(`welcome${userInfo.username}`, 1);
-    } else if (status === 'error') {
-      message.error("Sorry, you don't seem to have access");
-    }
+
     return (
       <div className={styles.main} style={{ textAlign: 'center', padding: 24 }}>
+        {status === 'error' ? (
+          <Alert message={formatMessage({ id: 'app.login.error' })} type="error" closable />
+        ) : (
+          ''
+        )}
+
         <Card
           title={formatMessage({ id: 'app.login.scan' })}
           bordered={false}
           style={{ width: 300 }}
+          loading={submitting}
           extra={
             <Tooltip title="Refresh">
               <Button shape="circle" icon="reload" onClick={this.refresh} />

@@ -9,8 +9,8 @@ const FooterView = () => (
     <GlobalFooter
       links={[
         {
-          key: '首页',
-          title: '首页',
+          key: 'home',
+          title: formatMessage({ id: 'component.globalFooter.home' }),
           href: '',
           blankTarget: true,
         },
@@ -22,7 +22,7 @@ const FooterView = () => (
         },
         {
           key: '课程共享计划',
-          title: '课程共享计划',
+          title: formatMessage({ id: 'component.globalFooter.plan' }),
           href: 'https://sustcs.github.io/course',
           blankTarget: true,
         },

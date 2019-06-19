@@ -1,38 +1,23 @@
-import React, { Component, Suspense } from 'react';
-import { connect } from 'dva';
-import GridContent from '@/components/PageHeaderWrapper/GridContent';
-import PageLoading from '@/components/PageLoading';
+import React, { Component } from 'react';
 
-const IntroduceRow = React.lazy(() => import('./IntroduceRow'));
-
-@connect(({ chart, loading }) => ({
-  chart,
-  loading: loading.effects['chart/fetch'],
-}))
 class Analysis extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   componentDidMount() {
-    const { dispatch } = this.props;
-    this.reqRef = requestAnimationFrame(() => {
-      dispatch({
-        type: 'chart/fetch',
-      });
+    this.setState({
+      data: 'test',
     });
   }
 
-  componentWillUnmount() {
-    cancelAnimationFrame(this.reqRef);
-  }
-
   render() {
-    const { chart, loading } = this.props;
-    const { visitData } = chart;
-
+    const { data } = this.state;
     return (
-      <GridContent>
-        <Suspense fallback={<PageLoading />}>
-          <IntroduceRow loading={loading} visitData={visitData} />
-        </Suspense>
-      </GridContent>
+      <div>
+        <img src="https://wg.sust.edu.cn/yizhanshier.jpg"></img>
+      </div>
     );
   }
 }

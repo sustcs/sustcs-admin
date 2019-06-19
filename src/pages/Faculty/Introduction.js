@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { findDOMNode } from 'react-dom';
 import { connect } from 'dva';
-import moment from 'moment';
+import { findDOMNode } from 'react-dom';
+
 import {
   Card,
   Button,
@@ -17,22 +17,19 @@ import {
   Row,
   Input,
 } from 'antd';
-
-import Ellipsis from '@/components/Ellipsis';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
-
 import BraftEditor from 'braft-editor';
 import 'braft-editor/dist/index.css';
 
-import styles from './SubjectColumn.less';
+import styles from './Introduction.less';
 
-@connect(({ subject, loading }) => ({
-  subject,
-  loading: loading.models.subject,
+@connect(({ introduction, loading }) => ({
+  introduction,
+  loading: loading.models.introduction,
 }))
 @Form.create()
-class CardList extends PureComponent {
+class Introduction extends PureComponent {
   state = {
     visible: false,
     done: false,
@@ -41,10 +38,8 @@ class CardList extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'subject/fetch',
-      payload: {
-        count: '',
-      },
+      type: 'introduction/fetch',
+      payload: {},
     });
   }
 
@@ -77,8 +72,22 @@ class CardList extends PureComponent {
   deleteSubmit = id => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'subject/submit',
+      type: 'introduction/submit',
       payload: { id },
+    });
+  };
+
+  onlineColumn = item => {
+    const submitData = {
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      enable: !item.enable,
+    };
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'introduction/submit',
+      payload: { submitData },
     });
   };
 
@@ -95,10 +104,10 @@ class CardList extends PureComponent {
         const submitData = {
           title: fieldsValue.title,
           description: fieldsValue.description.toHTML(),
-          enable: fieldsValue.enable,
+          enable: fieldsValue.enable ? 1 : 0,
         };
         dispatch({
-          type: 'subject/submit',
+          type: 'introduction/submit',
           payload: { id, ...submitData },
         });
       }
@@ -114,9 +123,11 @@ class CardList extends PureComponent {
   };
 
   render() {
-    const { form, subject, loading } = this.props;
-    const { list } = subject;
-    const { getFieldDecorator } = form;
+    const {
+      form: { getFieldDecorator },
+      introduction: { list },
+      loading,
+    } = this.props;
     const { done, current = {}, visible } = this.state;
     const content = (
       <div className={styles.pageHeaderContent}>
@@ -148,7 +159,7 @@ class CardList extends PureComponent {
           <Result
             type="success"
             title="操作成功"
-            description="一系列的信息描述，很短同样也可以带标点。"
+            description=""
             actions={
               <Button type="primary" onClick={this.onClose}>
                 知道了
@@ -248,11 +259,12 @@ class CardList extends PureComponent {
                       <Tooltip title="删除">
                         <Icon type="delete" onClick={() => deleteColumn(item)} />
                       </Tooltip>,
-                      <Tooltip title={`创建于${moment(item.createdAt).format('YYYY-MM-DD HH:mm')}`}>
+                      <Tooltip title={`创建于${item.created_at}`}>
                         <Switch
                           checkedChildren="启用"
                           unCheckedChildren="下线"
                           defaultChecked={item.enable === 1}
+                          onChange={() => this.onlineColumn(item)}
                         />
                         ,
                       </Tooltip>,
@@ -266,11 +278,6 @@ class CardList extends PureComponent {
                         />
                       }
                       title={<a>{item.title}</a>}
-                      description={
-                        <Ellipsis className={styles.item} lines={3}>
-                          {item.description}
-                        </Ellipsis>
-                      }
                     />
                   </Card>
                 </List.Item>
@@ -306,4 +313,4 @@ class CardList extends PureComponent {
   }
 }
 
-export default CardList;
+export default Introduction;
