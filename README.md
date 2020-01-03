@@ -1,4 +1,11 @@
-# init
+# Shaanxi university of science and technology computer science
+- client: [sustcs-miniprogram](https://github.com/sustcs/sustcs-miniprogram)
+- admin: [sustcs-admin](https://github.com/sustcs/sustcs-admin)
+- back_end api server: [sustcs-api](https://github.com/sustcs/sustcs-api)
+- oauth server: [sustcs-oauth](https://github.com/sustcs/sustcs-oauth)
+
+Please refer to the [wiki](https://github.com/sustcs/sustcs-miniprogram/wiki) for more
+# 1 init
 ```js
 create-react-app antd-demo
 cd antd-demo
@@ -16,7 +23,7 @@ cnpm i --save husky lint-staged prettier
 "husky": {...}
 cnpm install --save react-styleguidist
 ```
-## error
+## 1.1 error
 - The react-scripts package provided by Create React App requires a dependency:
 "webpack-dev-server": "3.2.1"
 However, a different version of webpack-dev-server was detected higher up in the tree:
@@ -39,7 +46,7 @@ contentscript.js:1 Uncaught Error
 - gh-pages do not upload
   origin <--> homepage
 
-# Router
+# 2 Router
 react-router
 |──react-router-dom
 └──react-router-native
@@ -47,7 +54,7 @@ react-router
 cnpm i react-router-dom --save
 ```
 how to config the router
-## Error
+## 2.1 Error
 - router '/'
 - The href attribute is required for an anchor to be keyboard accessible. Provide a valid, navigable address as the href value. If you cannot provide an href, but still need the element to resemble a link, use a button and change it with appropriate styles
 
